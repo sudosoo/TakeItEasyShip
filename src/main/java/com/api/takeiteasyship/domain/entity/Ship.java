@@ -19,11 +19,18 @@ public class Ship {
     @Column(updatable = false, nullable = false,columnDefinition = "BINARY(16)")
     private UUID id;
     private String ownerName;
-    private String description;
+    private String shippingAddress;
     private UUID orderId;
     private List<String> productIds;
 
-    public void shipProduct(List<String> productIds){
+    public void addProduct(List<String> productIds){
         this.productIds = productIds;
+    }
+
+    public Ship(UUID orderId, String ownerName, String shippingAddress, List<String> productIds) {
+        this.ownerName = ownerName;
+        this.shippingAddress = shippingAddress;
+        this.orderId = orderId;
+        this.productIds.addAll(productIds);
     }
 }
