@@ -23,10 +23,6 @@ public class Ship {
     private UUID orderId;
     private List<String> productIds;
 
-    public void addProduct(List<String> productIds){
-        this.productIds = productIds;
-    }
-
     public Ship(UUID orderId, String ownerName, String shippingAddress, List<String> productIds) {
         this.ownerName = ownerName;
         this.shippingAddress = shippingAddress;
