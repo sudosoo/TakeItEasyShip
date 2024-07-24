@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class ShipService {
     private final ShipRepository repository;
+
+    public ShipService(ShipRepository repository) {
+        this.repository = repository;
+    }
 
     public void register(ShippingRequestDto req) {
         Ship ship = req.toEntity();

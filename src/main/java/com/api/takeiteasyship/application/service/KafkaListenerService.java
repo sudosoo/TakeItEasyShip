@@ -13,10 +13,15 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
 public class KafkaListenerService {
     private final ShipService shipService;
     private final ObjectMapper objectMapper;
+
+    public KafkaListenerService(ShipService shipService, ObjectMapper objectMapper) {
+        this.shipService = shipService;
+        this.objectMapper = objectMapper;
+    }
+
     @Transactional
     @KafkaListener(topics = "order", groupId = "ship-group")
     public void orderListener(ConsumerRecord<String, String> record) throws JsonProcessingException {
@@ -27,6 +32,7 @@ public class KafkaListenerService {
                 ShippingRequestDto request = objectMapper.readValue(record.value(), ShippingRequestDto.class);
                 shipService.register(request);
                 break;
+
             case ORDER_CANCELLED:
                 ShippingCancelRequestDto req = objectMapper.readValue(record.value(), ShippingCancelRequestDto.class);
                 shipService.cancel(req);
