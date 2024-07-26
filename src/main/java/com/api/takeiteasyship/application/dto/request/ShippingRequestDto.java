@@ -1,20 +1,22 @@
 package com.api.takeiteasyship.application.dto.request;
 
 import com.api.takeiteasyship.domain.entity.Ship;
-import lombok.Getter;
+import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
+@Data
 public class ShippingRequestDto {
     private String orderId;
     private String orderOwner;
     private String shippingAddress;
     private String shippingMemo;
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
-    private static class Product {
+    @Data
+    public static class Product {
         private String productId;
         private String productName;
         private int quantity;

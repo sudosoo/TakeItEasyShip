@@ -17,7 +17,7 @@ import java.util.UUID;
 @Entity
 public class Ship {
     @Id
-    @Column(updatable = false, nullable = false,columnDefinition = "BINARY(16)")
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
     private UUID id;
     private String ownerName;
     private String shippingAddress;
@@ -27,7 +27,6 @@ public class Ship {
     @CollectionTable(name = "ship_product_ids", joinColumns = @JoinColumn(name = "ship_id"))
     @Column(name = "product_id")
     private List<String> productIds= new ArrayList<>();
-
 
     public Ship(UUID orderId, String ownerName, String shippingAddress, List<String> productIds) {
         this.ownerName = ownerName;

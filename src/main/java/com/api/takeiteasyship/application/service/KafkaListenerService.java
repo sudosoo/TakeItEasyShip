@@ -23,10 +23,9 @@ public class KafkaListenerService {
     }
 
     @Transactional
-    @KafkaListener(topics = "order", groupId = "ship-group")
+    @KafkaListener(topics = "ORDER", groupId = "ship-group")
     public void orderListener(ConsumerRecord<String, String> record) throws JsonProcessingException {
         KafkaOperationType operationType = KafkaOperationType.valueOf(record.key());
-
         switch (operationType) {
             case ORDER_COMPLETED:
                 ShippingRequestDto request = objectMapper.readValue(record.value(), ShippingRequestDto.class);
