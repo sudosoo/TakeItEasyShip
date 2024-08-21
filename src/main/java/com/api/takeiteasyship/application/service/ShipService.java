@@ -19,8 +19,7 @@ public class ShipService {
     private final ShipRepository repository;
 
     public void register(ShippingRequestDto req) {
-        Ship ship = req.toEntity();
-        repository.save(ship);
+        var ship = repository.save(req.toEntity());
         log.info("Ship registered: {}", ship);
     }
 
@@ -29,6 +28,14 @@ public class ShipService {
                 .ifPresent(repository::delete);
         log.info("Ship canceled: {}", req.getOrderId());
     }
+
+    public RespShip get(ShippingCancelRequestDto req){
+        repository.findByOrderId(UUID.fromString(req.getOrderId()))
+                .ifPresent(repository::delete);
+
+    }
+
+
 
 
 }

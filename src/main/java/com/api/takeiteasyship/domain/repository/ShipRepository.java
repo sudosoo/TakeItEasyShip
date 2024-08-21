@@ -8,5 +8,4 @@ import java.util.UUID;
 
 public interface ShipRepository extends JpaRepository<Ship, UUID> {
     Optional<Ship> findByOrderId(UUID orderId);
-
 }
